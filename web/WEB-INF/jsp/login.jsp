@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,21 +37,22 @@
                             <div class="card-body">
                                 <h5 class="card-title">COMECO</h5>
                                 <p class="card-text">Вход в систему учета COMECO.</p>
-                                <form>
+                                <form method="post" name="enter_user" action="${pageContext.request.contextPath}/login">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="exampleInputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                                         <small id="emailHelp" class="form-text text-muted">Введите Ваш e-mail используемый при регистрации.</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control" id="exampleInputPassword" name="password" placeholder="Password">
                                         <small id="passlHelp" class="form-text text-muted">Введите Ваш пароль.</small>
                                     </div>
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck">
                                         <label class="form-check-label" for="exampleCheck1">Запомнить на этом устройстве.</label>
                                     </div>
+                                    <input hidden name="flagRequest" value ="login">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -57,25 +61,26 @@
                             <div class="card-body">
                                 <h5 class="card-title">COMECO</h5>
                                 <p class="card-text">Регистрация в системе учета COMECO.</p>
-                                <form>
+                                <form method="post" name="new_user" action="${pageContext.request.contextPath}/login">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                                         <small id="emailHelp1" class="form-text text-muted">Введите Ваш e-mail.</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        <input type="password" class="form-control" id="exampleInputPassword1" name="password1" placeholder="Password">
                                         <small id="passlHelp2" class="form-text text-muted">Введите Ваш пароль.</small>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                        <input type="password" class="form-control" id="exampleInputPassword2" name="password2" placeholder="Password">
                                         <small id="passlHelp3" class="form-text text-muted">Введите Ваш пароль еще раз.</small>
                                     </div>
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                         <label class="form-check-label" for="exampleCheck1">Запомнить на этом устройстве.</label>
                                     </div>
+                                    <input hidden name="flagRequest" value ="login_new">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <p class="card-text"> </p>
                                     <div class="g-recaptcha" data-sitekey="6LfaCW8UAAAAACwW7VjVsvOl-DwqPDKMX2YNkV8t"></div>
@@ -87,6 +92,13 @@
                 </div>
             </div>
         </div>
+
+            <% String errorValue = (String) request.getAttribute("flagErrors");
+            if (errorValue=="100"){%>
+            <div class="alert alert-warning" role="alert">
+               Данные введены неверно. Проверьте вводимые данные.
+            </div>
+            <%}%>
     </div>
 
 </div>

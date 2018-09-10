@@ -7,6 +7,6 @@ import java.io.IOException;
 
 public interface Controller {
     String INDEX_PAGE = "/index.jsp";
-    void execute(HttpServletRequest req, HttpServletResponse pesp)
+    void execute(HttpServletRequest req, HttpServletResponse resp)
         throws IOException,ServletException;
 }

@@ -7,6 +7,7 @@ import com.cameco.entity.PackageSoft;
 import com.cameco.services.ServicePackageSoft;
 import com.cameco.services.ServiceUser;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +21,6 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        writer.write("<p><span style='color':blue;'>Число посещений адреса ="
-                + Setup.flagFirstLogin.toString()+" </span></p>");
         if (!Setup.flagFirstLogin) {
             PackageSoft packageSoft = new PackageSoft();
             packageSoft.setKey(0);
@@ -32,5 +30,7 @@ public class MainServlet extends HttpServlet {
             new ServicePackageSoft(DbConnection.getConnection()).add(packageSoft);
             Setup.flagFirstLogin = true;
         }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+        dispatcher.forward(req, resp);
     }
 }

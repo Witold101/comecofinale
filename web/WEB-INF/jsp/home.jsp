@@ -4,6 +4,6 @@
     <title>COMECO</title>
 </head>
 <body>
-<a href="login.jsp"> Login </a>
+<a href="${pageContext.request.contextPath}/login">Login</a>
 </body>
 </html>
