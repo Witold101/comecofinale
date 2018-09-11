@@ -3,9 +3,9 @@ package by.vistar.comeco.web.controllers;
 import by.vistar.comeco.controler.constants.ConstantsAttributes;
 import by.vistar.comeco.controler.constants.ConstantsParameters;
 import by.vistar.comeco.db.DbConnection;
+import by.vistar.comeco.entity.autor.User;
+import by.vistar.comeco.services.autor.ServiceUser;
 import by.vistar.comeco.web.controllers.validation.Validation;
-import com.cameco.entity.User;
-import com.cameco.services.ServiceUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

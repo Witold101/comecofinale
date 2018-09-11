@@ -1,8 +1,6 @@
 package by.vistar.comeco.controler;
 
-import com.cameco.services.ServicePackageSoft;
-import com.cameco.services.ServiceTablesInitDrop;
-import com.cameco.services.ServiceUser;
+import by.vistar.comeco.services.autor.ServiceTablesInitDrop;
 
 import java.sql.Connection;
 

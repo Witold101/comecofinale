@@ -3,7 +3,6 @@ package by.vistar.comeco.web.servlets;
 import by.vistar.comeco.controler.constants.ConstantsParameters;
 import by.vistar.comeco.web.controllers.LoginController;
 import by.vistar.comeco.web.controllers.NewUserController;
-import com.cameco.entity.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

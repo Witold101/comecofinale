@@ -2,9 +2,9 @@ package by.vistar.comeco.web.controllers;
 
 import by.vistar.comeco.controler.constants.ConstantsParameters;
 import by.vistar.comeco.db.DbConnection;
+import by.vistar.comeco.entity.autor.User;
+import by.vistar.comeco.services.autor.ServiceUser;
 import by.vistar.comeco.web.controllers.validation.Validation;
-import com.cameco.entity.User;
-import com.cameco.services.ServiceUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static by.vistar.comeco.controler.constants.ConstantsAttributes.FLAG_ERRORS;
+import static by.vistar.comeco.controler.constants.ConstantsErrors.ERROR_EQUALS_PASSWORD;
 import static by.vistar.comeco.controler.constants.ConstantsErrors.ERROR_LOGIN_OR_PASS;
 
 /**
@@ -22,22 +23,26 @@ import static by.vistar.comeco.controler.constants.ConstantsErrors.ERROR_LOGIN_O
 public class NewUserController implements Controller {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String login = req.getParameter(ConstantsParameters.LOGIN_NEW);
-        String password = req.getParameter(ConstantsParameters.PASSWORD);
-        req.setAttribute(FLAG_ERRORS,ERROR_LOGIN_OR_PASS);
-        if (login != null && password != null) {
-            if (Validation.validationLogin(login) && Validation.validationPassword(password)) {
+        String login = req.getParameter(ConstantsParameters.EMAIL);
+        String password1 = req.getParameter(ConstantsParameters.PASSWORD_1);
+        String password2 = req.getParameter(ConstantsParameters.PASSWORD_2);
+        if (login != null && password1 != null && password1.equals(password2)) {
+            req.setAttribute(FLAG_ERRORS, ERROR_LOGIN_OR_PASS);
+            if (Validation.validationLogin(login) && Validation.validationPassword(password1)) {
                 User user = new User();
                 user.setLogin(login);
                 user.setE_mail(login);
                 user.setPackage_id(1L);
-                user.setPassword(password);
-                user = new ServiceUser(DbConnection.getConnection()).add(user);
+                user.setPassword(password1);
+                ServiceUser serviceUser = new ServiceUser(DbConnection.getConnection());
+                user = serviceUser.add(user);
                 if (user.getId() != null) {
                     req.getSession().setAttribute(ConstantsParameters.USER, user);
-                    req.setAttribute(FLAG_ERRORS,null);
+                    req.setAttribute(FLAG_ERRORS, null);
                 }
             }
+        } else {
+            req.setAttribute(FLAG_ERRORS, ERROR_EQUALS_PASSWORD);
         }
     }
 }

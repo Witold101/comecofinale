@@ -3,9 +3,8 @@ package by.vistar.comeco.web.servlets;
 import by.vistar.comeco.controler.InitDropTables;
 import by.vistar.comeco.controler.Setup;
 import by.vistar.comeco.db.DbConnection;
-import com.cameco.entity.PackageSoft;
-import com.cameco.services.ServicePackageSoft;
-import com.cameco.services.ServiceUser;
+import by.vistar.comeco.entity.autor.PackageSoft;
+import by.vistar.comeco.services.autor.ServicePackageSoft;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
